@@ -1,9 +1,17 @@
+import { useContext } from "react";
 import { WrapperComponent } from "../../components";
+import { Members } from "../../contexts/MainContext";
 import InputContainer from "./InputContainer";
 import ListContainer from "./ListContainer";
 import SubmitContainer from "./SubmitContainer";
 
 const AddMembersContainer = () => {
+  const { resetMembers } = useContext(Members);
+
+  const handleResetOnClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    resetMembers();
+  };
   return (
     <>
       <WrapperComponent>
@@ -12,7 +20,10 @@ const AddMembersContainer = () => {
       </WrapperComponent>
       <hr />
       <WrapperComponent>
-        <h2>추가된 팀원</h2>
+        <header>
+          <h2>추가된 팀원</h2>
+          <span onClick={handleResetOnClick}>초기화</span>
+        </header>
         <ListContainer />
       </WrapperComponent>
       <hr />

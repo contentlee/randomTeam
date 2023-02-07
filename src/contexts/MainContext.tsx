@@ -3,11 +3,13 @@ import React, { useState } from "react";
 interface MembersInterface {
   members: string[];
   setMembers: (member: string[]) => void;
+  resetMembers: () => void;
 }
 
 export const Members = React.createContext<MembersInterface>({
   members: [],
   setMembers: (member) => {},
+  resetMembers: () => {},
 });
 
 interface TeamsInterface {
@@ -15,6 +17,7 @@ interface TeamsInterface {
   setTeams: (team: string[]) => void;
   teamCount: number;
   setTeamCount: (count: number) => void;
+  resetTeams: () => void;
 }
 
 export const Teams = React.createContext<TeamsInterface>({
@@ -22,16 +25,19 @@ export const Teams = React.createContext<TeamsInterface>({
   setTeams: (team) => {},
   teamCount: 0,
   setTeamCount: (count) => {},
+  resetTeams: () => {},
 });
 
 interface ResultsInterface {
   results: string[][];
   setResults: (result: string[][]) => void;
+  resetAll: () => void;
 }
 
 export const Results = React.createContext<ResultsInterface>({
   results: [],
   setResults: (result) => {},
+  resetAll: () => {},
 });
 
 const MainContext = ({ children }: React.PropsWithChildren) => {
@@ -50,7 +56,6 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
     setMembers([]);
   };
   const resetTeams = () => {
-    setTeamCount(0);
     setTeams([]);
   };
 
@@ -62,9 +67,9 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
   };
 
   return (
-    <Members.Provider value={{ members, setMembers: changeMembers }}>
-      <Teams.Provider value={{ teams, setTeams: changeTeams, teamCount, setTeamCount: changeTeamCount }}>
-        <Results.Provider value={{ results, setResults: changeResults }}>{children}</Results.Provider>
+    <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>
+      <Teams.Provider value={{ teams, setTeams: changeTeams, teamCount, setTeamCount: changeTeamCount, resetTeams }}>
+        <Results.Provider value={{ results, setResults: changeResults, resetAll }}>{children}</Results.Provider>
       </Teams.Provider>
     </Members.Provider>
   );

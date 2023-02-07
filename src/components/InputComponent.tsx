@@ -7,6 +7,8 @@ interface Props {
     placeholder?: string;
     fn?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     max?: string;
+
+    defaultValue?: string | number;
   };
 }
 
@@ -18,7 +20,7 @@ const Input = styled.input`
   border: 1px solid #c4c4c4;
   border-radius: 10px;
 
-  color: #c4c4c4;
+  color: #000;
   font-weight: 300;
 
   box-sizing: border-box;
@@ -28,14 +30,14 @@ const Input = styled.input`
   &:focus {
     outline: none;
 
-    box-shadow: 0 0 12px gray;
+    box-shadow: 0 0 5px gray;
   }
 `;
 
 const InputComponent = ({
-  props: { type = "text", placeholder = "입력해주세요", max = "100", fn = () => {} },
+  props: { type = "text", placeholder = "입력해주세요", max = "100", fn = () => {}, defaultValue },
 }: Props) => {
-  return <Input type={type} placeholder={placeholder} onChange={fn} min="0" max={max} />;
+  return <Input type={type} placeholder={placeholder} onChange={fn} min="0" max={max} defaultValue={defaultValue} />;
 };
 
 export default InputComponent;

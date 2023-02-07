@@ -15,7 +15,7 @@ const InputForm = styled.form`
 
 const InputContainer = () => {
   const { members } = useContext(Members);
-  const { teams, setTeams, setTeamCount } = useContext(Teams);
+  const { teams, setTeams, teamCount, setTeamCount } = useContext(Teams);
 
   const handleCountOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -40,6 +40,8 @@ const InputContainer = () => {
     if (value) {
       if (teams.includes(value)) {
         alert("중복된 팀명이 존재합니다.");
+      } else if (members.length <= teams.length) {
+        alert("멤버의 수가 팀 수보다 많습니다.");
       } else {
         setTeams([...teams, value]);
         (e.currentTarget[1] as HTMLInputElement).value = "";
@@ -53,6 +55,7 @@ const InputContainer = () => {
         props={{
           type: "number",
           placeholder: "몇 개의 팀으로 나눠지나요?",
+          defaultValue: teamCount,
           max: String(members.length),
           fn: handleCountOnChange,
         }}

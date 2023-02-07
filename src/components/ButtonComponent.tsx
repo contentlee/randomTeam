@@ -30,7 +30,7 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0 0 12px gray;
+    box-shadow: 0 0 5px gray;
     filter: grayscale(40%);
   }
 `;

@@ -35,8 +35,10 @@ const ResultContainer = () => {
 
   return (
     <WrapperComponent>
-      <h2>결과</h2>
-      <Back onClick={handleBackOnClick}>처음으로 돌아가기</Back>
+      <header>
+        <h2>결과</h2>
+        <span onClick={handleBackOnClick}>다시 설정하기</span>
+      </header>
       <ListContainer />
     </WrapperComponent>
   );

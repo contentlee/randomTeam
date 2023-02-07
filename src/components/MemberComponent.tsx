@@ -20,7 +20,7 @@ const Member = styled.div`
   cursor: default;
 
   &:hover {
-    box-shadow: 0 0 12px #c4c4c4;
+    box-shadow: 0 0 5px #c4c4c4;
   }
 
   img {
