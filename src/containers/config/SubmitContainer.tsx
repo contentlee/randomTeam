@@ -14,8 +14,8 @@ const SubmitContainer = () => {
     e.preventDefault();
     if (teamCount) {
       const temp = await divideMember(members, teamCount);
+
       setResults(temp);
-      console.log(temp);
       navigate("/result");
     } else {
       alert("팀수를 입력하세요!");

@@ -2,8 +2,7 @@ interface Team {
   [index: string | number]: string[];
 }
 
-export const divideMember = (members: string[], count: number) => {
-  const team: Team = {};
+export const divideMember = (members: string[], count: number, team: { [index: number | string]: string[] } = {}) => {
   const remainder = members.length % count;
   const personnel = Math.floor(members.length / count);
 
