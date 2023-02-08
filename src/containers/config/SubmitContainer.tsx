@@ -8,12 +8,12 @@ const SubmitContainer = () => {
   const navigate = useNavigate();
   const { teamCount } = useContext(Teams);
   const { members } = useContext(Members);
-  const { setResults } = useContext(Results);
+  const { results, setResults } = useContext(Results);
 
   const handleSubmitOnClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (teamCount) {
-      const temp = await divideMember(members, teamCount);
+      const temp = await divideMember(members, teamCount, results);
 
       setResults(temp);
       navigate("/result");

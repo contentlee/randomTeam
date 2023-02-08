@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { WrapperComponent } from "../../components";
-import { Members } from "../../contexts/MainContext";
+import { Members, Results } from "../../contexts/MainContext";
 import ListContainer from "./ListContainer";
 
 const Back = styled.a`
@@ -23,9 +23,11 @@ const Back = styled.a`
 const ResultContainer = () => {
   const navigate = useNavigate();
   const { members } = useContext(Members);
+  const { resetResults } = useContext(Results);
 
   const handleBackOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    resetResults();
     navigate("/");
   };
 

@@ -11,6 +11,11 @@ const ConfigContainer = () => {
   const { members } = useContext(Members);
   const { resetTeams } = useContext(Teams);
 
+  const handleBackOnClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/");
+  };
+
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
     resetTeams();
@@ -23,7 +28,10 @@ const ConfigContainer = () => {
   return (
     <>
       <WrapperComponent>
-        <h2>팀 옵션 설정</h2>
+        <header>
+          <h2>팀 옵션 설정</h2>
+          <span onClick={handleBackOnClick}>이전으로 돌아가기</span>
+        </header>
         <InputContainer />
       </WrapperComponent>
       <hr />

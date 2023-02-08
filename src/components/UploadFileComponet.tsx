@@ -55,7 +55,7 @@ const UploadFileComponent = ({ props: { fn = () => {} }, style }: Props) => {
       <input type="file" name="upload" id="upload" accept=".txt" onChange={fn} />
 
       <label htmlFor="upload">
-        <span>파일</span>
+        <span>업로드</span>
       </label>
     </InputWrapper>
   );

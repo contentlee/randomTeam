@@ -20,7 +20,7 @@ const RadioWrapper = styled.div`
   }
 `;
 
-const Label = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가"];
+const Label = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가", "결과 값까지 모두 설정"];
 
 const UploadFileContainer = () => {
   const { members, setMembers } = useContext(Members);
@@ -41,7 +41,7 @@ const UploadFileContainer = () => {
     reader.onload = () => {
       const result = reader.result as string;
       const temp = result.split("\r\n");
-      if ((mode === "0" || mode === "2") && temp[0]?.includes("members")) {
+      if (mode !== "1" && temp[0]?.includes("members")) {
         const tempArray = temp[0].split(":");
         const additionalMembers = tempArray[1].split(",");
         setMembers([...members, ...additionalMembers]);
@@ -54,9 +54,12 @@ const UploadFileContainer = () => {
 
       if (mode === "3" && temp[2]?.includes("results")) {
         const tempArray = temp[2].split(":");
-        const additionalResults = tempArray[1].split(",").map((value) => {
-          const result = value.split(",");
-          return result;
+        const additionalResults = tempArray[1].split("],[").map((value, i) => {
+          let tempString = value;
+          if (i === 0) tempString = tempString.replace("[", "");
+          if (value[value.length - 1] === "]") tempString = tempString.replace("]", "");
+          const tempArray = tempString.split(",");
+          return tempArray;
         });
         setResults([...results, ...additionalResults]);
       }

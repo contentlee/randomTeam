@@ -31,12 +31,14 @@ export const Teams = React.createContext<TeamsInterface>({
 interface ResultsInterface {
   results: string[][];
   setResults: (result: string[][]) => void;
+  resetResults: () => void;
   resetAll: () => void;
 }
 
 export const Results = React.createContext<ResultsInterface>({
   results: [],
   setResults: (result) => {},
+  resetResults: () => {},
   resetAll: () => {},
 });
 
@@ -59,6 +61,10 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
     setTeams([]);
   };
 
+  const resetResults = () => {
+    setResults([]);
+  };
+
   const resetAll = () => {
     setMembers([]);
     setTeams([]);
@@ -69,7 +75,9 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
   return (
     <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>
       <Teams.Provider value={{ teams, setTeams: changeTeams, teamCount, setTeamCount: changeTeamCount, resetTeams }}>
-        <Results.Provider value={{ results, setResults: changeResults, resetAll }}>{children}</Results.Provider>
+        <Results.Provider value={{ results, setResults: changeResults, resetResults, resetAll }}>
+          {children}
+        </Results.Provider>
       </Teams.Provider>
     </Members.Provider>
   );
