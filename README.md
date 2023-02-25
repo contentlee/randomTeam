@@ -1,4 +1,4 @@
-# 무작위 팀설정
+# RANDOM_TEAM
 
 팀을 무작위로 나누는 프로젝트입니다.
 
@@ -16,6 +16,8 @@
 
 ## Deployment
 
+[RANDOM_TEAM](http://random-team.s3-website.ap-northeast-2.amazonaws.com)
+
 ## Requirment
 
 For building and running the app you need:
@@ -26,6 +28,11 @@ For building and running the app you need:
 ##
 
 ## Stack
+
+- react & react-dom 18.2.0
+- typescript 4.4.2
+- react-router-dom 6.8.0
+- styled-components 5.0.0
 
 ## Folder Structure
 
