@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Random Team
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+팀을 무작위로 나누는 프로젝트입니다.
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+## How to Use
 
-### `yarn start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. 팀원을 추가합니다.
+2. 나누고 싶은 팀의 개수와 팀명을 추가합니다. (팀명의 경우 Optional)
+3. 무작위로 나눠진 결과물을 받습니다!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+※ 파일 업로드시
 
-### `yarn test`
+1. 모드를 설정합니다.
+2. 파일을 업로드 합니다. (결과물로 받거나 형식에 맞게 작성된 txt 파일)
+3. 업로드시 모드에 맞게 값이 추가됩니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `yarn build`
+## Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Requirment
 
-### `yarn eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+For building and running the app you need:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node.js 18.12.1
+- Yarn 1.22.19
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Installation
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+$ git clone https://github.com/contentlee/randomTeam.git
+$ cd my-app
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
+
+## Stack
+
+---
+
+<br/>
+
+## Folder Structure
+
+---
+
+```
+src
+  ├─components
+  │  ├─add
+  │  ├─common
+  │  ├─config
+  │  └─result
+  ├─containers
+  │  ├─add
+  │  ├─config
+  │  ├─main
+  │  └─result
+  ├─contexts
+  ├─lib
+  └─pages
+```
