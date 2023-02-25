@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface MembersInterface {
   members: string[];
@@ -71,6 +72,12 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
     setTeamCount(0);
     setResults([]);
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (members.length === 0) navigate("/");
+  }, [members]);
 
   return (
     <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>

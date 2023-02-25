@@ -23,13 +23,14 @@ export const divideMember = (members: string[], count: number, alc: string[][] =
   const remainder = members.length % count;
   const personnel = Math.floor(members.length / count);
   let flag = 0;
+
   members.forEach((member) => {
     if (!list.includes(member)) {
       let random = Math.floor(Math.random() * count);
 
       while (
         results[random] &&
-        (results[random]?.length > personnel || (flag >= remainder && results[random].length === personnel))
+        (results[random].length > personnel || (flag >= remainder && results[random].length === personnel))
       ) {
         random = Math.floor(Math.random() * count);
       }

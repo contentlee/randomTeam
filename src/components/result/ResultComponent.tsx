@@ -18,7 +18,7 @@ const Result = styled.div`
   word-break: normal;
 
   &:hover {
-    box-shadow: 0 0 12px #c4c4c4;
+    box-shadow: 0 0 5px #c4c4c4;
     border: 1.2px solid gray;
 
     color: gray;

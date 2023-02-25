@@ -22,20 +22,6 @@ export const Wrapper = styled.section`
     h2 {
       margin: 0;
     }
-
-    span {
-      margin-left: 10px;
-
-      color: #c4c4c4;
-      font-weight: 100;
-      font-size: 14px;
-
-      &:hover {
-        cursor: pointer;
-        color: #000;
-        font-weight: 300;
-      }
-    }
   }
 
   h2 {

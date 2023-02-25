@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "../../components";
 import { Members, Results, Teams } from "../../contexts/MainContext";
-import { divideMember } from "../../lib";
+import { divideMember } from "../../lib/divideMember";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();

@@ -24,7 +24,7 @@ const Label = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가"
 
 const UploadFileContainer = () => {
   const { members, setMembers } = useContext(Members);
-  const { teams, setTeams } = useContext(Teams);
+  const { teams, setTeams, teamCount, setTeamCount } = useContext(Teams);
   const { results, setResults } = useContext(Results);
 
   const [mode, setMode] = useState("0");
@@ -40,7 +40,7 @@ const UploadFileContainer = () => {
     const reader = new FileReader();
     reader.onload = () => {
       const result = reader.result as string;
-      const temp = result.split("\r\n");
+      const temp = result.split("\n");
       if (mode !== "1" && temp[0]?.includes("members")) {
         const tempArray = temp[0].split(":");
         const additionalMembers = tempArray[1].split(",");
@@ -49,7 +49,9 @@ const UploadFileContainer = () => {
       if (mode !== "0" && temp[1]?.includes("teams")) {
         const tempArray = temp[1].split(":");
         const additionalTeams = tempArray[1].split(",");
-        setTeams([...teams, ...additionalTeams]);
+        if (additionalTeams.length !== 1 && additionalTeams[0] !== "") {
+          setTeams([...teams, ...additionalTeams]);
+        }
       }
 
       if (mode === "3" && temp[2]?.includes("results")) {
@@ -61,6 +63,7 @@ const UploadFileContainer = () => {
           const tempArray = tempString.split(",");
           return tempArray;
         });
+        setTeamCount(teamCount + additionalResults.length);
         setResults([...results, ...additionalResults]);
       }
     };

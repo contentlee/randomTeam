@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { WrapperComponent } from "../../components";
-import { Members, Results } from "../../contexts/MainContext";
+import BackContainer from "./BackContainer";
 import ListContainer from "./ListContainer";
+import ResetContainer from "./ResetContainer";
+import SaveContainer from "./SaveContainer";
 
 const Back = styled.a`
   display: block;
@@ -21,27 +21,17 @@ const Back = styled.a`
 `;
 
 const ResultContainer = () => {
-  const navigate = useNavigate();
-  const { members } = useContext(Members);
-  const { resetResults } = useContext(Results);
-
-  const handleBackOnClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    resetResults();
-    navigate("/");
-  };
-
-  useEffect(() => {
-    if (members.length === 0) navigate("/");
-  }, [members]);
-
   return (
     <WrapperComponent>
       <header>
         <h2>결과</h2>
-        <span onClick={handleBackOnClick}>다시 설정하기</span>
+        <BackContainer />
       </header>
-      <ListContainer />
+      <div>
+        <ResetContainer />
+        <SaveContainer />
+        <ListContainer />
+      </div>
     </WrapperComponent>
   );
 };

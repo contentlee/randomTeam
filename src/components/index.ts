@@ -1,11 +1,11 @@
-import ButtonComponent from "./ButtonComponent";
-import InputComponent from "./InputComponent";
-import RadioComponent from "./RadioComponent";
-import MemberComponent from "./MemberComponent";
-import UploadFileComponent from "./UploadFileComponet";
-import WrapperComponent from "./WrapperComponent";
-import TeamComponent from "./TeamComponent";
-import ResultComponent from "./ResultComponent";
+import ButtonComponent from "./common/ButtonComponent";
+import InputComponent from "./common/InputComponent";
+import RadioComponent from "./add/RadioComponent";
+import MemberComponent from "./add/MemberComponent";
+import UploadFileComponent from "./add/UploadFileComponet";
+import WrapperComponent from "./common/WrapperComponent";
+import TeamComponent from "./config/TeamComponent";
+import ResultComponent from "./result/ResultComponent";
 
 export {
   ButtonComponent,

@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Button = styled.button`
-  margin: 0 5px;
+  margin: 1px 5px;
   width: ${(props) => (props.style?.width ? props.style.width : "100px")};
   height: 40px;
 

@@ -1,20 +1,11 @@
-import { useContext } from "react";
 import { WrapperComponent } from "../../components";
-import { Members } from "../../contexts/MainContext";
 import InputContainer from "./InputContainer";
 import ListContainer from "./ListContainer";
+import ResetContainer from "./ResetContainer";
 import SubmitContainer from "./SubmitContainer";
 import UploadFileContainer from "./UploadFileContainer";
 
 const AddMembersContainer = () => {
-  const { members, resetMembers } = useContext(Members);
-
-  const handleResetOnClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    resetMembers();
-  };
-
-  const handleSaveOnClick = () => {};
   return (
     <>
       <WrapperComponent>
@@ -31,8 +22,7 @@ const AddMembersContainer = () => {
       <WrapperComponent>
         <header>
           <h2>추가된 팀원</h2>
-          <span onClick={handleResetOnClick}>초기화</span>
-          <span>멤버 저장</span>
+          <ResetContainer />
         </header>
         <ListContainer />
       </WrapperComponent>

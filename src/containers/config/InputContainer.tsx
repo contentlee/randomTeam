@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ButtonComponent, InputComponent } from "../../components";
-import { Members, Teams } from "../../contexts/MainContext";
+import { Members, Results, Teams } from "../../contexts/MainContext";
 
 const InputForm = styled.form`
   padding: 5px;
@@ -16,13 +16,17 @@ const InputForm = styled.form`
 const InputContainer = () => {
   const { members } = useContext(Members);
   const { teams, setTeams, teamCount, setTeamCount } = useContext(Teams);
+  const { results } = useContext(Results);
 
   const handleCountOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
 
     if (value) {
-      if (members.length >= Number(value)) {
+      if (results.length && results.length > Number(value)) {
+        alert("결과값으로 설정된 팀의 수보다 적습니다!");
+        e.target.value = String(results.length);
+      } else if (members.length >= Number(value)) {
         setTeamCount(Number(value));
       } else {
         alert("팀의 수가 멤버의 수를 초과하였습니다!");
