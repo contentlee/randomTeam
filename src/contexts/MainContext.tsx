@@ -48,8 +48,26 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
   const [teams, setTeams] = useState<string[]>([]);
   const [teamCount, setTeamCount] = useState<number>(0);
 
-  const changeMembers = (member: string[]) => setMembers(member);
-  const changeTeams = (team: string[]) => setTeams(team);
+  const changeMembers = (member: string[]) => {
+    const tempSet = new Set([...member]);
+
+    if (tempSet.size === member.length) {
+      setMembers([...tempSet]);
+    } else {
+      alert("중복된 이름이 존재합니다! (해당 이름은 추가되지 않습니다.)");
+      setMembers([...tempSet]);
+    }
+  };
+  const changeTeams = (team: string[]) => {
+    const tempSet = new Set([...team]);
+
+    if (tempSet.size === team.length) {
+      setTeams(team);
+    } else {
+      alert("중복된 팀명이 존재합니다! (해당 이름은 추가되지 않습니다.");
+      setTeams([...tempSet]);
+    }
+  };
   const changeTeamCount = (count: number) => setTeamCount(count);
 
   const [results, setResults] = useState<string[][]>([]);
