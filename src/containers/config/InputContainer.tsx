@@ -44,6 +44,8 @@ const InputContainer = () => {
     if (value) {
       if (teams.includes(value)) {
         alert("중복된 팀명이 존재합니다.");
+      } else if (teams.length >= teamCount) {
+        alert("팀명의 개수가 입력된 팀 개수를 초과했습니다.");
       } else if (members.length <= teams.length) {
         alert("멤버의 수가 팀 수보다 많습니다.");
       } else {

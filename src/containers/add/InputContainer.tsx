@@ -24,7 +24,7 @@ const InputContainer = () => {
 
   return (
     <InputForm onSubmit={handleInputOnSubmit}>
-      <InputComponent props={{}} />
+      <InputComponent props={{ placeholder: "팀원명을 입력해주세요." }} />
       <ButtonComponent props={{ name: "추가", type: "submit" }} />
     </InputForm>
   );
