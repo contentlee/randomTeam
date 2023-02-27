@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useMatch, useMatches, useNavigate } from "react-router";
 
 interface MembersInterface {
   members: string[];
@@ -89,6 +90,18 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
     setTeamCount(0);
     setResults([]);
   };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+    const pathname = location.pathname;
+    if (pathname !== "/add" && members.length === 0) {
+      navigate("/add");
+    }
+    if (pathname === "/result" && results.length === 0) {
+      navigate("/add");
+    }
+  }, [members, results, location, navigate]);
 
   return (
     <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>
