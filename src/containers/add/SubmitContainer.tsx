@@ -18,7 +18,7 @@ const SubmitContainer = () => {
   return (
     <ButtonComponent
       props={{ name: "다음", fn: handleSubmitOnClick }}
-      style={{ width: "100%", backgroundColor: "red" }}
+      style={{ width: "-webkit-fill-available", backgroundColor: "red" }}
     />
   );
 };

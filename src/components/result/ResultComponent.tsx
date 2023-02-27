@@ -7,6 +7,9 @@ interface Props {
 const Result = styled.div`
   margin: 5px;
   padding: 15px;
+  width: 100%
+
+  box-sizing: border-box;
 
   border: 1.2px solid #c4c4c4;
   border-radius: 10px;

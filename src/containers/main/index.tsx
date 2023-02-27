@@ -7,8 +7,11 @@ export const Container = styled.main`
   justify-content: center;
   align-items: center;
 
-  width: 480px;
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box;
+
+  max-width: 480px;
 `;
 const MainContainer = () => {
   return (

@@ -7,7 +7,7 @@ import SubmitContainer from "./SubmitContainer";
 
 const ConfigContainer = () => {
   return (
-    <>
+    <div style={{ width: "100%" }}>
       <WrapperComponent>
         <header>
           <h2>팀 옵션 설정</h2>
@@ -25,7 +25,7 @@ const ConfigContainer = () => {
       </WrapperComponent>
       <hr />
       <SubmitContainer />
-    </>
+    </div>
   );
 };
 

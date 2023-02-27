@@ -6,6 +6,14 @@ import { Members } from "../../contexts/MainContext";
 const InputForm = styled.form`
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: 320px) {
+    flex-direction: column;
+
+    button {
+      width: -webkit-fill-available;
+    }
+  }
 `;
 
 const InputContainer = () => {

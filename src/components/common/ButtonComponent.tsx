@@ -28,6 +28,7 @@ const Button = styled.button`
   font-size: 14px;
   font-weight: 600;
 
+  box-sizing: border-box;
   &:hover {
     cursor: pointer;
     box-shadow: 0 0 5px gray;

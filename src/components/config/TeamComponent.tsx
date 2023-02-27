@@ -12,7 +12,7 @@ const Team = styled.div`
 
   margin: 5px;
   padding: 5px 15px;
-  height: 32px;
+  min-height: 32px;
 
   border: 1.2px solid #c4c4c4;
   border-radius: 10px;

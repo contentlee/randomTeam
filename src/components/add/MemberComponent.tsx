@@ -11,7 +11,7 @@ const Member = styled.div`
 
   margin: 5px;
   padding: 5px 15px;
-  height: 24px;
+  min-height: 24px;
 
   border-radius: 50px;
 

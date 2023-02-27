@@ -4,12 +4,20 @@ import { ButtonComponent, InputComponent } from "../../components";
 import { Members, Results, Teams } from "../../contexts/MainContext";
 
 const InputForm = styled.form`
+  width: 100%;
   padding: 5px;
-
   box-sizing: border-box;
+
   div {
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 320px) {
+      flex-direction: column;
+
+      button {
+        width: -webkit-fill-available;
+      }
+    }
   }
 `;
 
