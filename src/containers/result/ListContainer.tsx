@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { ButtonComponent, ResultComponent } from "../../components";
+import { ResultComponent } from "../../components";
 import { Results, Teams } from "../../contexts/MainContext";
 
 const ListContainer = () => {
   const { teams } = useContext(Teams);
-  const { results, resetAll } = useContext(Results);
+  const { results } = useContext(Results);
 
   return (
     <div>

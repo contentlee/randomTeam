@@ -95,7 +95,7 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
 
   useEffect(() => {
     if (members.length === 0) navigate("/");
-  }, [members]);
+  }, [members, navigate]);
 
   return (
     <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>

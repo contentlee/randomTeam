@@ -17,7 +17,7 @@ const BackContainer = () => {
     if (!results.length) {
       navigate("/");
     }
-  }, []);
+  }, [results, navigate]);
   return <ResetBackComponent props={{ name: "다시 설정하기(결과값 초기화)", fn: handleBackOnClick }} />;
 };
 
