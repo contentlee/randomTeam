@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { RadioComponent, UploadFileComponent } from "../../components";
-import { Members, Results, Teams } from "../../contexts/MainContext";
+
+import { RadioComponent, UploadFileComponent } from "src/components/add";
+import { Members, Results, Teams } from "src/contexts/MainContext";
 import { initialInput, intialInputArray } from "src/utils/uploadFile";
 
 const RadioContainer = styled.div`
@@ -21,18 +22,21 @@ const RadioWrapper = styled.div`
   }
 `;
 
-const Label = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가", "결과 값까지 모두 설정"];
+const LABEL = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가", "결과 값 추가"];
 
 const UploadFileContainer = () => {
   const { members, setMembers } = useContext(Members);
-  const { teams, setTeams, teamCount, setTeamCount } = useContext(Teams);
+  const { teams, setTeams } = useContext(Teams);
   const { results, setResults } = useContext(Results);
 
-  const [mode, setMode] = useState("0");
+  const [mode, setMode] = useState<number>(0);
 
   const handleModeOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.checked) setMode(e.target.id);
+    if (e.target.checked) {
+      setMode(Number(e.target.id));
+      console.log(e.target.id);
+    }
   };
 
   const handleUploadOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,23 +44,24 @@ const UploadFileContainer = () => {
     const files = e.target.files;
     const reader = new FileReader();
     reader.onload = () => {
-      const result = reader.result as string;
-      const temp = result.split("\n");
-      if (mode !== "1" && temp[0]?.includes("members")) {
-        const additionalMembers = initialInput(temp[0]);
-        if (additionalMembers.length >= 2 || additionalMembers[0] !== "")
-          setMembers([...members, ...additionalMembers]);
+      const res = (reader.result as string).split("\n");
+
+      if (mode === 3 && res[2]?.includes("results")) {
+        const additionalResults = intialInputArray(res[2]);
+        setResults([...results, ...additionalResults]);
       }
-      if (mode !== "0" && temp[1]?.includes("teams")) {
-        const additionalTeams = initialInput(temp[1]);
+
+      if (mode !== 0 && res[1]?.includes("teams")) {
+        const additionalTeams = initialInput(res[1]);
         if (additionalTeams.length >= 2 || additionalTeams[0] !== "") {
           setTeams([...teams, ...additionalTeams]);
-          setTeamCount(teamCount + additionalTeams.length);
         }
       }
-      if (mode === "3" && temp[2]?.includes("results")) {
-        const additionalResults = intialInputArray(temp[2]);
-        setResults([...results, ...additionalResults]);
+
+      if (mode !== 1 && res[0]?.includes("members")) {
+        const additionalMembers = initialInput(res[0]);
+        if (additionalMembers.length >= 2 || additionalMembers[0] !== "")
+          setMembers([...members, ...additionalMembers]);
       }
     };
     reader.onerror = () => {
@@ -72,11 +77,12 @@ const UploadFileContainer = () => {
   return (
     <RadioContainer>
       <RadioWrapper>
-        {Label.map((label, i) => {
+        {LABEL.map((label, i) => {
           return (
             <RadioComponent
               key={i}
-              props={{ mode: mode, name: "upload", label: label, value: String(i), fn: handleModeOnChange }}
+              mode={mode}
+              props={{ name: "upload", label: label, value: i, fn: handleModeOnChange }}
             />
           );
         })}
