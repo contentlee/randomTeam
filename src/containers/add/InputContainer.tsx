@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ButtonComponent, InputComponent } from "../../components";
-import { Members } from "../../contexts/MainContext";
+
+import { Members } from "src/contexts/MainContext";
+import { ButtonComponent, InputComponent } from "src/components/common";
 
 const InputForm = styled.form`
   display: flex;

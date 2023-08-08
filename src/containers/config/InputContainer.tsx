@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { ButtonComponent, InputComponent } from "../../components";
-import { Members, Results, Teams } from "../../contexts/MainContext";
+
+import { ButtonComponent, InputComponent } from "src/components/common";
+import { Members, Results, Teams } from "src/contexts/MainContext";
 
 const InputForm = styled.form`
   width: 100%;
