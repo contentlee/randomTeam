@@ -21,7 +21,5 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint", "react"],
-  rules: {
-    "no-useless-escape": false,
-  },
+  rules: {},
 };
