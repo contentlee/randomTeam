@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { ButtonComponent } from "src/components";
+
+import { ButtonComponent } from "src/components/common";
 import { Members, Results, Teams } from "src/contexts/MainContext";
 
 const SaveContainer = () => {

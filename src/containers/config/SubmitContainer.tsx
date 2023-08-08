@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "../../components";
-import { Members, Results, Teams } from "../../contexts/MainContext";
-import { divideMember } from "../../lib/divideMember";
+
+import { ButtonComponent } from "src/components/common";
+import { Members, Results, Teams } from "src/contexts/MainContext";
+import { divideMember } from "src/utils/divideMember";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
@@ -10,10 +11,10 @@ const SubmitContainer = () => {
   const { members } = useContext(Members);
   const { results, setResults } = useContext(Results);
 
-  const handleSubmitOnClick = async (e: React.MouseEvent) => {
+  const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (teamCount) {
-      const temp = await divideMember(members, teamCount, results);
+      const temp = divideMember(members, teamCount, results);
 
       setResults(temp);
       navigate("/result");

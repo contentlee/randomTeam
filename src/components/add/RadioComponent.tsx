@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
+  mode: number;
   props: {
-    mode: string;
     name: string;
-    value: string;
+    value: number;
     label: string;
     fn: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
@@ -36,11 +37,16 @@ const RadioLabel = styled.div`
   }
 `;
 
-const RadioComponent = ({ props: { mode, name, value, label, fn } }: Props) => {
+const RadioComponent = ({ mode, props: { name, value, label, fn } }: Props) => {
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(mode === value);
+  }, [mode, value]);
+
   return (
     <RadioLabel>
-      <input defaultChecked={mode === value} type="radio" name={name} id={value} onChange={fn} />
-      <label htmlFor={value}>{label}</label>
+      <input checked={checked} type="radio" name={name} id={String(value)} onChange={fn} />
+      <label htmlFor={String(value)}>{label}</label>
     </RadioLabel>
   );
 };

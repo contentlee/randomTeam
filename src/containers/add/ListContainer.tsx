@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { MemberComponent } from "../../components";
-import { Members } from "../../contexts/MainContext";
+
+import { MemberComponent } from "src/components/add";
+import { Members } from "src/contexts/MainContext";
 
 const ListContainer = () => {
   const { members, setMembers } = useContext(Members);

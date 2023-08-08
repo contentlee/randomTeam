@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import ResetBackComponent from "src/components/common/ResetBackComponent";
+
+import { ResetBackComponent } from "src/components/common";
 import { Members } from "src/contexts/MainContext";
 
 const ResetContainer = () => {
