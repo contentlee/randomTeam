@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { ButtonComponent, InputComponent } from "src/components/common";
-import { Members, Results, Teams } from "src/contexts/MainContext";
+import { membersState, teamCountState, teamsState, resultsState } from "@atoms/mainAtom";
+
+import { ButtonComponent, InputComponent } from "@components/common";
 
 const InputForm = styled.form`
   width: 100%;
@@ -23,9 +25,10 @@ const InputForm = styled.form`
 `;
 
 const InputContainer = () => {
-  const { members } = useContext(Members);
-  const { teams, setTeams, teamCount, setTeamCount } = useContext(Teams);
-  const { results } = useContext(Results);
+  const members = useRecoilValue(membersState);
+  const results = useRecoilValue(resultsState);
+  const [teams, setTeams] = useRecoilState(teamsState);
+  const [teamCount, setTeamCount] = useRecoilState(teamCountState);
 
   const handleCountOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

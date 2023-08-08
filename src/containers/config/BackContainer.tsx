@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ResetBackComponent } from "src/components/common";
+import { ResetBackComponent } from "@components/common";
 
 const BackContainer = () => {
   const navigate = useNavigate();

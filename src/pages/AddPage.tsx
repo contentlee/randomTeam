@@ -1,12 +1,6 @@
-import { WrapperComponent } from "src/components/common";
-import {
-  InputContainer,
-  ListContainer,
-  ResetContainer,
-  SubmitContainer,
-  UploadFileContainer,
-} from "src/containers/add";
-import { MainContainer } from "src/containers/common";
+import { WrapperComponent } from "@components/common";
+import { InputContainer, ListContainer, ResetContainer, SubmitContainer, UploadFileContainer } from "@containers/add";
+import { MainContainer } from "@containers/common";
 
 const AddMembersPage = () => {
   return (

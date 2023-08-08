@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface Props {
-  props: { id: number; name: string; member?: string[]; delete_fn?: (id: number) => void };
+  props: { id: number; name: string; delete_fn?: (e: React.MouseEvent, id: number) => void };
 }
 
 const Team = styled.div`
@@ -44,21 +44,12 @@ const Team = styled.div`
   }
 `;
 
-const TeamComponent = ({ props: { id, name, member, delete_fn } }: Props) => {
+const TeamComponent = ({ props: { id, name, delete_fn } }: Props) => {
   return (
     <Team>
       <span>{name}</span>
 
-      {delete_fn && (
-        <img
-          src={"assets/delete.png"}
-          alt="delete"
-          onClick={(e) => {
-            e.preventDefault();
-            delete_fn(id);
-          }}
-        />
-      )}
+      {delete_fn && <img src={"assets/delete.png"} alt="delete" onClick={(e) => delete_fn(e, id)} />}
 
       {}
     </Team>

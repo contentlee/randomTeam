@@ -1,9 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+
 import styled from "styled-components";
 
-import { RadioComponent, UploadFileComponent } from "src/components/add";
-import { Members, Results, Teams } from "src/contexts/MainContext";
-import { initialInput, intialInputArray } from "src/utils/uploadFile";
+import { RadioComponent, UploadFileComponent } from "@components/add";
+import { checkDuplication, initialInput, intialInputArray } from "@utils/uploadFile";
+import { LABEL } from "@helpers/constant";
+import { membersState, teamsState, resultsState, teamCountState } from "@atoms/mainAtom";
 
 const RadioContainer = styled.div`
 p {
@@ -22,12 +25,11 @@ const RadioWrapper = styled.div`
   }
 `;
 
-const LABEL = ["팀원만 추가", "팀명만 추가", "팀원과 팀명 추가", "결과 값 추가"];
-
 const UploadFileContainer = () => {
-  const { members, setMembers } = useContext(Members);
-  const { teams, setTeams } = useContext(Teams);
-  const { results, setResults } = useContext(Results);
+  const [members, setMembers] = useRecoilState(membersState);
+  const [teams, setTeams] = useRecoilState(teamsState);
+  const setTeamCount = useSetRecoilState(teamCountState);
+  const setResults = useSetRecoilState(resultsState);
 
   const [mode, setMode] = useState<number>(0);
 
@@ -35,7 +37,6 @@ const UploadFileContainer = () => {
     e.preventDefault();
     if (e.target.checked) {
       setMode(Number(e.target.id));
-      console.log(e.target.id);
     }
   };
 
@@ -43,25 +44,32 @@ const UploadFileContainer = () => {
     e.preventDefault();
     const files = e.target.files;
     const reader = new FileReader();
+
     reader.onload = () => {
       const res = (reader.result as string).split("\n");
 
-      if (mode === 3 && res[2]?.includes("results")) {
-        const additionalResults = intialInputArray(res[2]);
-        setResults([...results, ...additionalResults]);
+      if (mode !== 1 && res[0]?.includes("members")) {
+        const additionalMembers = initialInput(res[0]);
+        if (additionalMembers.length >= 2 || additionalMembers[0] !== "") {
+          const [isDuplicated, checkedMembers] = checkDuplication([...members, ...additionalMembers]);
+          if (!isDuplicated) alert("중복된 이름이 존재합니다! (해당 이름은 추가되지 않습니다.)");
+          setMembers(checkedMembers);
+        }
       }
 
       if (mode !== 0 && res[1]?.includes("teams")) {
         const additionalTeams = initialInput(res[1]);
         if (additionalTeams.length >= 2 || additionalTeams[0] !== "") {
-          setTeams([...teams, ...additionalTeams]);
+          const [isDuplicated, checkedTeams] = checkDuplication([...teams, ...additionalTeams]);
+          if (!isDuplicated) alert("중복된 팀명이 존재합니다! (해당 이름은 추가되지 않습니다.");
+          setTeams(checkedTeams);
         }
       }
 
-      if (mode !== 1 && res[0]?.includes("members")) {
-        const additionalMembers = initialInput(res[0]);
-        if (additionalMembers.length >= 2 || additionalMembers[0] !== "")
-          setMembers([...members, ...additionalMembers]);
+      if (mode === 3 && res[2]?.includes("results")) {
+        const additionalResults = intialInputArray(res[2]);
+        setResults(additionalResults);
+        setTeamCount(additionalResults.length);
       }
     };
     reader.onerror = () => {

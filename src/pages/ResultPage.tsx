@@ -1,6 +1,6 @@
-import { WrapperComponent } from "src/components/common";
-import { MainContainer } from "src/containers/common";
-import { BackContainer, ListContainer, ResetContainer, SaveContainer } from "src/containers/result";
+import { WrapperComponent } from "@components/common";
+import { MainContainer } from "@containers/common";
+import { BackContainer, ListContainer, ResetContainer, SaveContainer } from "@containers/result";
 
 const ResultPage = () => {
   return (

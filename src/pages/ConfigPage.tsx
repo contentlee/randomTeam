@@ -1,6 +1,6 @@
-import { WrapperComponent } from "src/components/common";
-import { MainContainer } from "src/containers/common";
-import { BackContainer, InputContainer, ListContainer, ResetContainer, SubmitContainer } from "src/containers/config";
+import { WrapperComponent } from "@components/common";
+import { MainContainer } from "@containers/common";
+import { BackContainer, InputContainer, ListContainer, ResetContainer, SubmitContainer } from "@containers/config";
 
 const ConfigPage = () => {
   return (

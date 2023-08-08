@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "src/components/common";
-import { Members } from "src/contexts/MainContext";
+import { useRecoilValue } from "recoil";
+
+import { ButtonComponent } from "@components/common";
+import { membersState } from "@atoms/mainAtom";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
-  const { members } = useContext(Members);
+  const members = useRecoilValue(membersState);
 
   const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

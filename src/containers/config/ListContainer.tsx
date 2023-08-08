@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import React from "react";
+import { useRecoilState } from "recoil";
 
-import { TeamComponent } from "src/components/config";
-import { Teams } from "src/contexts/MainContext";
+import { TeamComponent } from "@components/config";
+
+import { teamsState } from "@atoms/mainAtom";
 
 const ListContainer = () => {
-  const { teams, setTeams } = useContext(Teams);
+  const [teams, setTeams] = useRecoilState(teamsState);
 
-  const handleDeleteTeamOnClick = (id: number) => {
-    let temp = [...teams];
+  const handleDeleteTeamOnClick = (e: React.MouseEvent, id: number) => {
+    const temp = [...teams];
     temp.splice(id, 1);
     setTeams(temp);
   };

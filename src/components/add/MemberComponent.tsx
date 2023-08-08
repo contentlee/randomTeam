@@ -1,7 +1,8 @@
+import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  props: { id: number; name: string; delete_fn?: (id: number) => void };
+  props: { id: number; name: string; delete_fn?: (e: React.MouseEvent, id: number) => void };
 }
 
 const Member = styled.div`
@@ -40,18 +41,7 @@ const MemberComponent = ({ props: { id, name, delete_fn } }: Props) => {
   return (
     <Member>
       <span>{name}</span>
-      {delete_fn ? (
-        <img
-          src={"assets/delete.png"}
-          alt="delete"
-          onClick={(e) => {
-            e.preventDefault();
-            delete_fn(id);
-          }}
-        />
-      ) : (
-        <></>
-      )}
+      {delete_fn ? <img src={"assets/delete.png"} alt="delete" onClick={(e) => delete_fn(e, id)} /> : <></>}
     </Member>
   );
 };

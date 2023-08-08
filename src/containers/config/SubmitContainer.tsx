@@ -1,15 +1,17 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { ButtonComponent } from "src/components/common";
-import { Members, Results, Teams } from "src/contexts/MainContext";
-import { divideMember } from "src/utils/divideMember";
+import { ButtonComponent } from "@components/common";
+import { divideMember } from "@utils/divideMember";
+import { membersState, teamCountState, resultsState } from "@atoms/mainAtom";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
-  const { teamCount } = useContext(Teams);
-  const { members } = useContext(Members);
-  const { results, setResults } = useContext(Results);
+
+  const teamCount = useRecoilValue(teamCountState);
+  const members = useRecoilValue(membersState);
+
+  const [results, setResults] = useRecoilState(resultsState);
 
   const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

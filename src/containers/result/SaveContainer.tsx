@@ -1,17 +1,17 @@
-import { useContext } from "react";
+import { useRecoilValue } from "recoil";
 
-import { ButtonComponent } from "src/components/common";
-import { Members, Results, Teams } from "src/contexts/MainContext";
+import { ButtonComponent } from "@components/common";
+import { membersState, teamsState, resultsState } from "@atoms/mainAtom";
 
 const SaveContainer = () => {
-  const { members } = useContext(Members);
-  const { teams } = useContext(Teams);
-  const { results } = useContext(Results);
+  const members = useRecoilValue(membersState);
+  const teams = useRecoilValue(teamsState);
+  const results = useRecoilValue(resultsState);
 
   const handleSaveOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    let element = document.createElement("a");
-    let text = `members:${members}
+    const element = document.createElement("a");
+    const text = `members:${members}
 teams:${teams}
 results:${results.map((result) => `[${result}]`)}
     `;
