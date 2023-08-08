@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { RadioComponent, UploadFileComponent } from "../../components";
 import { Members, Results, Teams } from "../../contexts/MainContext";
+import { initialInput, intialInputArray } from "src/utils/uploadFile";
 
 const RadioContainer = styled.div`
 p {
@@ -30,11 +31,11 @@ const UploadFileContainer = () => {
   const [mode, setMode] = useState("0");
 
   const handleModeOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (e.target.checked) setMode(e.target.id);
   };
 
-  const handleUploadOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUploadOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const files = e.target.files;
     const reader = new FileReader();
@@ -42,35 +43,27 @@ const UploadFileContainer = () => {
       const result = reader.result as string;
       const temp = result.split("\n");
       if (mode !== "1" && temp[0]?.includes("members")) {
-        const tempArray = temp[0].split(":");
-        const additionalMembers = tempArray[1].split(",");
-        setMembers([...members, ...additionalMembers]);
+        const additionalMembers = initialInput(temp[0]);
+        if (additionalMembers.length >= 2 || additionalMembers[0] !== "")
+          setMembers([...members, ...additionalMembers]);
       }
       if (mode !== "0" && temp[1]?.includes("teams")) {
-        const tempArray = temp[1].split(":");
-        const additionalTeams = tempArray[1].split(",");
-        if (additionalTeams.length !== 1 && additionalTeams[0] !== "") {
+        const additionalTeams = initialInput(temp[1]);
+        if (additionalTeams.length >= 2 || additionalTeams[0] !== "") {
           setTeams([...teams, ...additionalTeams]);
+          setTeamCount(teamCount + additionalTeams.length);
         }
       }
-
       if (mode === "3" && temp[2]?.includes("results")) {
-        const tempArray = temp[2].split(":");
-        const additionalResults = tempArray[1].split("],[").map((value, i) => {
-          let tempString = value;
-          if (i === 0) tempString = tempString.replace("[", "");
-          if (value[value.length - 1] === "]") tempString = tempString.replace("]", "");
-          const tempArray = tempString.split(",");
-          return tempArray;
-        });
-        setTeamCount(teamCount + additionalResults.length);
+        const additionalResults = intialInputArray(temp[2]);
         setResults([...results, ...additionalResults]);
       }
     };
     reader.onerror = () => {
       alert("문제가 생겼어요!");
     };
-    if (files) await reader.readAsText(files[0]);
+
+    if (files) reader.readAsText(files[0]);
 
     e.target.files = null;
     e.target.value = "";
