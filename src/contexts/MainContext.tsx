@@ -71,7 +71,10 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
   const changeTeamCount = (count: number) => setTeamCount(count);
 
   const [results, setResults] = useState<string[][]>([]);
-  const changeResults = (result: string[][]) => setResults(result);
+  const changeResults = (result: string[][]) => {
+    setTeamCount(result.length);
+    setResults(result);
+  };
 
   const resetMembers = () => {
     setMembers([]);
@@ -82,6 +85,7 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
 
   const resetResults = () => {
     setResults([]);
+    setTeamCount(0);
   };
 
   const resetAll = () => {

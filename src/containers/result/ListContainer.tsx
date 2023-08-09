@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { ResultComponent } from "../../components";
-import { Results, Teams } from "../../contexts/MainContext";
+
+import { ResultComponent } from "src/components/result";
+import { Results, Teams } from "src/contexts/MainContext";
 
 const ListContainer = () => {
   const { teams } = useContext(Teams);

@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { TeamComponent } from "../../components";
-import { Teams } from "../../contexts/MainContext";
+
+import { TeamComponent } from "src/components/config";
+import { Teams } from "src/contexts/MainContext";
 
 const ListContainer = () => {
   const { teams, setTeams } = useContext(Teams);

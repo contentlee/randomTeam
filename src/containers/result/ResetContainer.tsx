@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "src/components";
+
+import { ButtonComponent } from "src/components/common";
 import { Results } from "src/contexts/MainContext";
 
 const ResetContainer = () => {

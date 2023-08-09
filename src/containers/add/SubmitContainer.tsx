@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonComponent } from "../../components";
-import { Members } from "../../contexts/MainContext";
+import { ButtonComponent } from "src/components/common";
+import { Members } from "src/contexts/MainContext";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
