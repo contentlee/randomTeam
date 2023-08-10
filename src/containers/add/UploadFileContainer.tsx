@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import styled from "styled-components";
 
@@ -28,8 +28,8 @@ const RadioWrapper = styled.div`
 const UploadFileContainer = () => {
   const [members, setMembers] = useRecoilState(membersState);
   const [teams, setTeams] = useRecoilState(teamsState);
-  const setTeamCount = useSetRecoilState(teamCountState);
-  const setResults = useSetRecoilState(resultsState);
+  const [teamCount, setTeamCount] = useRecoilState(teamCountState);
+  const [results, setResults] = useRecoilState(resultsState);
 
   const [mode, setMode] = useState<number>(0);
 
@@ -68,8 +68,10 @@ const UploadFileContainer = () => {
 
       if (mode === 3 && res[2]?.includes("results")) {
         const additionalResults = intialInputArray(res[2]);
-        setResults(additionalResults);
-        setTeamCount(additionalResults.length);
+        if (String(results) !== String(additionalResults)) {
+          setResults([...results, ...additionalResults]);
+          setTeamCount(teamCount + additionalResults.length);
+        }
       }
     };
     reader.onerror = () => {
