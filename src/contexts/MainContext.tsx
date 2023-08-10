@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import React, { useState } from "react";
 
 interface MembersInterface {
   members: string[];
@@ -50,7 +51,7 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
 
   const changeMembers = (member: string[]) => {
     const tempSet = new Set([...member]);
-
+    console.log(tempSet);
     if (tempSet.size === member.length) {
       setMembers([...tempSet]);
     } else {
@@ -85,7 +86,6 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
 
   const resetResults = () => {
     setResults([]);
-    setTeamCount(0);
   };
 
   const resetAll = () => {
@@ -94,18 +94,6 @@ const MainContext = ({ children }: React.PropsWithChildren) => {
     setTeamCount(0);
     setResults([]);
   };
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  useEffect(() => {
-    const pathname = location.pathname;
-    if (pathname !== "/add" && members.length === 0) {
-      navigate("/add");
-    }
-    if (pathname === "/result" && results.length === 0) {
-      navigate("/add");
-    }
-  }, [members, results, location, navigate]);
 
   return (
     <Members.Provider value={{ members, setMembers: changeMembers, resetMembers }}>
