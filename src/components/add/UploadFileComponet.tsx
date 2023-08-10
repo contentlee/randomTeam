@@ -49,7 +49,7 @@ const InputWrapper = styled.div`
   }
 `;
 
-const UploadFileComponent = ({ props: { fn = () => {} }, style }: Props) => {
+const UploadFileComponent = ({ props: { fn = () => {} } }: Props) => {
   return (
     <InputWrapper>
       <input type="file" name="upload" id="upload" accept=".txt" onChange={fn} />
