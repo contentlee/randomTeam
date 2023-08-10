@@ -1,9 +1,8 @@
-import React from "react";
-import { useRecoilState } from "recoil";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { ButtonComponent, InputComponent } from "@components/common";
-import { membersState } from "@atoms/mainAtom";
+import { Members } from "@contexts/MainContext";
 
 const InputForm = styled.form`
   display: flex;
@@ -19,17 +18,15 @@ const InputForm = styled.form`
 `;
 
 const InputContainer = () => {
-  const [state, setState] = useRecoilState(membersState);
+  const { members, setMembers } = useContext(Members);
 
   const handleInputOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const value = (e.currentTarget[0] as HTMLInputElement).value;
-
-    if (state.includes(value)) {
-      alert("해당 이름은 중복된 이름입니다!");
-    } else {
-      setState([...state, value]);
+    console.log(value);
+    if (value) {
+      setMembers([...members, value]);
       (e.currentTarget[0] as HTMLInputElement).value = "";
     }
   };

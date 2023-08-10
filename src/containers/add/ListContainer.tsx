@@ -1,14 +1,13 @@
-import { useRecoilState } from "recoil";
+import { useContext } from "react";
 
 import { MemberComponent } from "@components/add";
-import { membersState } from "@atoms/mainAtom";
+import { Members } from "@contexts/MainContext";
 
 const ListContainer = () => {
-  const [members, setMembers] = useRecoilState(membersState);
+  const { members, setMembers } = useContext(Members);
 
   const handleDeleteMemberOnClick = (e: React.MouseEvent, id: number) => {
     e.preventDefault();
-
     const temp = [...members];
     temp.splice(id, 1);
     setMembers(temp);

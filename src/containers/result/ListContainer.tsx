@@ -1,11 +1,11 @@
-import { useRecoilValue } from "recoil";
+import { useContext } from "react";
 
 import { ResultComponent } from "@components/result";
-import { teamsState, resultsState } from "@atoms/mainAtom";
+import { Results, Teams } from "@contexts/MainContext";
 
 const ListContainer = () => {
-  const teams = useRecoilValue(teamsState);
-  const results = useRecoilValue(resultsState);
+  const { teams } = useContext(Teams);
+  const { results } = useContext(Results);
 
   return (
     <div>

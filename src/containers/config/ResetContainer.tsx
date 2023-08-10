@@ -1,16 +1,14 @@
-import { useResetRecoilState } from "recoil";
+import { useContext } from "react";
 
-import { teamCountState, teamsState } from "@atoms/mainAtom";
 import { ResetBackComponent } from "@components/common";
+import { Teams } from "@contexts/MainContext";
 
 const ResetContainer = () => {
-  const resetTeams = useResetRecoilState(teamsState);
-  const resetTeamCount = useResetRecoilState(teamCountState);
+  const { resetTeams } = useContext(Teams);
 
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
     resetTeams();
-    resetTeamCount();
   };
   return <ResetBackComponent props={{ name: "초기화", fn: handleResetOnClick }} />;
 };

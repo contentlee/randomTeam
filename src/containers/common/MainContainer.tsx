@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { membersState, resultsState } from "@atoms/mainAtom";
+import { Members, Results } from "@contexts/MainContext";
 
 interface Props {
   children: React.ReactNode;
@@ -25,8 +24,8 @@ const MainContainer = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const members = useRecoilValue(membersState);
-  const results = useRecoilValue(resultsState);
+  const { members } = useContext(Members);
+  const { results } = useContext(Results);
 
   useEffect(() => {
     const pathname = location.pathname;

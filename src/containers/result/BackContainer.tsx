@@ -1,12 +1,12 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
 
-import ResetBackComponent from "@components/common/ResetBackComponent";
-import { resultsState } from "@atoms/mainAtom";
+import { ResetBackComponent } from "@components/common";
+import { Results } from "@contexts/MainContext";
 
 const BackContainer = () => {
   const navigate = useNavigate();
-  const resetResults = useResetRecoilState(resultsState);
+  const { resetResults } = useContext(Results);
 
   const handleBackOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

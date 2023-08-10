@@ -1,10 +1,10 @@
-import { useResetRecoilState } from "recoil";
+import { useContext } from "react";
 
 import { ResetBackComponent } from "@components/common";
-import { membersState } from "@atoms/mainAtom";
+import { Members } from "@contexts/MainContext";
 
 const ResetContainer = () => {
-  const resetMembers = useResetRecoilState(membersState);
+  const { resetMembers } = useContext(Members);
 
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
