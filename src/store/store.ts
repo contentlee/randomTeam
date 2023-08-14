@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import memberSlice from "src/reducers/memberSlice";
-import resultSlice from "src/reducers/resultSlice";
-import teamSlice from "src/reducers/teamSlice";
+import memberSlice from "@reducers/memberSlice";
+import resultSlice from "@reducers/resultSlice";
+import teamSlice from "@reducers/teamSlice";
 
 export const store = configureStore({
   reducer: {
