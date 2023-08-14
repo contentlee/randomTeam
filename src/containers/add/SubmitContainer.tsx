@@ -1,13 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 
+import { useAppSelector } from "@store/hooks";
 import { ButtonComponent } from "@components/common";
-import { membersState } from "@atoms/mainAtom";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
-  const members = useRecoilValue(membersState);
+  const members = useAppSelector(({ members }) => members);
 
   const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

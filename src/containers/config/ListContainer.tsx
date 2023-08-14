@@ -1,17 +1,17 @@
 import React from "react";
-import { useRecoilState } from "recoil";
 
 import { TeamComponent } from "@components/config";
 
-import { teamsState } from "@atoms/mainAtom";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { deleteTeam } from "@reducers/teamSlice";
 
 const ListContainer = () => {
-  const [teams, setTeams] = useRecoilState(teamsState);
+  const teams = useAppSelector(({ teams }) => teams.list);
+  const dispatch = useAppDispatch();
 
   const handleDeleteTeamOnClick = (e: React.MouseEvent, id: number) => {
-    const temp = [...teams];
-    temp.splice(id, 1);
-    setTeams(temp);
+    e.preventDefault();
+    dispatch(deleteTeam(id));
   };
 
   return (

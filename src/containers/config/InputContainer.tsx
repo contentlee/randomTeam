@@ -1,10 +1,10 @@
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { membersState, teamCountState, teamsState, resultsState } from "@atoms/mainAtom";
-
 import { ButtonComponent, InputComponent } from "@components/common";
+
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { addTeam, changeTeamCount, resetTeamCount } from "@reducers/teamSlice";
 
 const InputForm = styled.form`
   width: 100%;
@@ -25,10 +25,14 @@ const InputForm = styled.form`
 `;
 
 const InputContainer = () => {
-  const members = useRecoilValue(membersState);
-  const results = useRecoilValue(resultsState);
-  const [teams, setTeams] = useRecoilState(teamsState);
-  const [teamCount, setTeamCount] = useRecoilState(teamCountState);
+  const dispatch = useAppDispatch();
+
+  const { members, teams, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+    members,
+    teams: teams.list,
+    teamCount: teams.count,
+    results,
+  }));
 
   const handleCountOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -39,13 +43,13 @@ const InputContainer = () => {
         alert("결과값으로 설정된 팀의 수보다 적습니다!");
         e.target.value = String(results.length);
       } else if (members.length >= Number(value)) {
-        setTeamCount(Number(value));
+        dispatch(changeTeamCount(Number(value)));
       } else {
         alert("팀의 수가 멤버의 수를 초과하였습니다!");
         e.target.value = "";
       }
     } else {
-      setTeamCount(0);
+      dispatch(resetTeamCount());
     }
   };
 
@@ -61,7 +65,7 @@ const InputContainer = () => {
       } else if (members.length <= teams.length) {
         alert("멤버의 수가 팀 수보다 많습니다.");
       } else {
-        setTeams([...teams, value]);
+        dispatch(addTeam(value));
         (e.currentTarget[1] as HTMLInputElement).value = "";
       }
     }
@@ -73,7 +77,7 @@ const InputContainer = () => {
         props={{
           type: "number",
           placeholder: "몇 개의 팀으로 나눠지나요?",
-          defaultValue: teamCount,
+          value: teamCount,
           max: String(members.length),
           fn: handleCountOnChange,
         }}

@@ -1,16 +1,14 @@
-import { useResetRecoilState } from "recoil";
-
-import { teamCountState, teamsState } from "@atoms/mainAtom";
 import { ResetBackComponent } from "@components/common";
 
+import { useAppDispatch } from "@store/hooks";
+import { resetTeamAll } from "@reducers/teamSlice";
+
 const ResetContainer = () => {
-  const resetTeams = useResetRecoilState(teamsState);
-  const resetTeamCount = useResetRecoilState(teamCountState);
+  const dispatch = useAppDispatch();
 
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    resetTeams();
-    resetTeamCount();
+    dispatch(resetTeamAll());
   };
   return <ResetBackComponent props={{ name: "초기화", fn: handleResetOnClick }} />;
 };

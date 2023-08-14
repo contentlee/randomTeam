@@ -1,14 +1,14 @@
-import { useResetRecoilState } from "recoil";
-
 import { ResetBackComponent } from "@components/common";
-import { membersState } from "@atoms/mainAtom";
+
+import { useAppDispatch } from "@store/hooks";
+import { resetMember } from "@reducers/memberSlice";
 
 const ResetContainer = () => {
-  const resetMembers = useResetRecoilState(membersState);
+  const dispatch = useAppDispatch();
 
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    resetMembers();
+    dispatch(resetMember());
   };
   return <ResetBackComponent props={{ name: "초기화", fn: handleResetOnClick }} />;
 };

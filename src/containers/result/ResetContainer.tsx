@@ -1,23 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
 
 import { ButtonComponent } from "@components/common";
-import { membersState, teamsState, resultsState, teamCountState } from "@atoms/mainAtom";
+
+import { useAppDispatch } from "@store/hooks";
+import { resetMember } from "@reducers/memberSlice";
+import { resetTeamAll } from "@reducers/teamSlice";
+import { resetResults } from "@reducers/resultSlice";
 
 const ResetContainer = () => {
   const navigate = useNavigate();
 
-  const resetMembers = useResetRecoilState(membersState);
-  const resetTeams = useResetRecoilState(teamsState);
-  const resetTeamCount = useResetRecoilState(teamCountState);
-  const resetResults = useResetRecoilState(resultsState);
+  const dispatch = useAppDispatch();
 
   const handleResetOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    resetMembers();
-    resetTeams();
-    resetTeamCount();
-    resetResults();
+    dispatch(resetMember());
+    dispatch(resetTeamAll());
+    dispatch(resetResults());
 
     navigate("/");
   };

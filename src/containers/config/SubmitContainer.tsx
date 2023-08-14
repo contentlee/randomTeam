@@ -1,24 +1,27 @@
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 import { ButtonComponent } from "@components/common";
+
 import { divideMember } from "@utils/divideMember";
-import { membersState, teamCountState, resultsState } from "@atoms/mainAtom";
+
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { setResults } from "@reducers/resultSlice";
 
 const SubmitContainer = () => {
   const navigate = useNavigate();
 
-  const teamCount = useRecoilValue(teamCountState);
-  const members = useRecoilValue(membersState);
-
-  const [results, setResults] = useRecoilState(resultsState);
+  const dispatch = useAppDispatch();
+  const { members, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+    members,
+    teamCount: teams.count,
+    results,
+  }));
 
   const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (teamCount) {
       const temp = divideMember(members, teamCount, results);
-
-      setResults(temp);
+      dispatch(setResults(temp));
       navigate("/result");
     } else {
       alert("팀수를 입력하세요!");

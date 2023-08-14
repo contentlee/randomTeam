@@ -1,17 +1,15 @@
-import { useRecoilState } from "recoil";
-
 import { MemberComponent } from "@components/add";
-import { membersState } from "@atoms/mainAtom";
+
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { deleteMember } from "@reducers/memberSlice";
 
 const ListContainer = () => {
-  const [members, setMembers] = useRecoilState(membersState);
+  const dispatch = useAppDispatch();
+  const members = useAppSelector(({ members }) => members);
 
   const handleDeleteMemberOnClick = (e: React.MouseEvent, id: number) => {
     e.preventDefault();
-
-    const temp = [...members];
-    temp.splice(id, 1);
-    setMembers(temp);
+    dispatch(deleteMember(id));
   };
 
   return (

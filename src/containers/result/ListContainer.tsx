@@ -1,11 +1,12 @@
-import { useRecoilValue } from "recoil";
-
 import { ResultComponent } from "@components/result";
-import { teamsState, resultsState } from "@atoms/mainAtom";
+
+import { useAppSelector } from "@store/hooks";
 
 const ListContainer = () => {
-  const teams = useRecoilValue(teamsState);
-  const results = useRecoilValue(resultsState);
+  const { teams, results } = useAppSelector(({ teams, results }) => ({
+    teams: teams.list,
+    results,
+  }));
 
   return (
     <div>

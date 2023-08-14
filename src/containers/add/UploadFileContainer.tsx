@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
 
 import styled from "styled-components";
 
 import { RadioComponent, UploadFileComponent } from "@components/add";
 import { checkDuplication, initialInput, intialInputArray } from "@utils/uploadFile";
 import { LABEL } from "@helpers/constant";
-import { membersState, teamsState, resultsState, teamCountState } from "@atoms/mainAtom";
+
+import { useAppSelector } from "@store/hooks";
+import { useDispatch } from "react-redux";
+import { addMembers } from "@reducers/memberSlice";
+import { addTeams, changeTeamCount } from "@reducers/teamSlice";
+import { setResults } from "@reducers/resultSlice";
 
 const RadioContainer = styled.div`
 p {
@@ -26,10 +30,13 @@ const RadioWrapper = styled.div`
 `;
 
 const UploadFileContainer = () => {
-  const [members, setMembers] = useRecoilState(membersState);
-  const [teams, setTeams] = useRecoilState(teamsState);
-  const [teamCount, setTeamCount] = useRecoilState(teamCountState);
-  const [results, setResults] = useRecoilState(resultsState);
+  const dispatch = useDispatch();
+  const { members, teams, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+    members,
+    teams: teams.list,
+    teamCount: teams.count,
+    results,
+  }));
 
   const [mode, setMode] = useState<number>(0);
 
@@ -53,7 +60,7 @@ const UploadFileContainer = () => {
         if (additionalMembers.length >= 2 || additionalMembers[0] !== "") {
           const [isDuplicated, checkedMembers] = checkDuplication([...members, ...additionalMembers]);
           if (!isDuplicated) alert("중복된 이름이 존재합니다! (해당 이름은 추가되지 않습니다.)");
-          setMembers(checkedMembers);
+          dispatch(addMembers(checkedMembers));
         }
       }
 
@@ -62,15 +69,16 @@ const UploadFileContainer = () => {
         if (additionalTeams.length >= 2 || additionalTeams[0] !== "") {
           const [isDuplicated, checkedTeams] = checkDuplication([...teams, ...additionalTeams]);
           if (!isDuplicated) alert("중복된 팀명이 존재합니다! (해당 이름은 추가되지 않습니다.");
-          setTeams(checkedTeams);
+          dispatch(addTeams(checkedTeams));
         }
       }
 
       if (mode === 3 && res[2]?.includes("results")) {
         const additionalResults = intialInputArray(res[2]);
         if (String(results) !== String(additionalResults)) {
-          setResults([...results, ...additionalResults]);
-          setTeamCount(teamCount + additionalResults.length);
+          console.log(results);
+          dispatch(setResults(additionalResults));
+          dispatch(changeTeamCount(teamCount + additionalResults.length));
         }
       }
     };

@@ -1,16 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useResetRecoilState } from "recoil";
 
 import ResetBackComponent from "@components/common/ResetBackComponent";
-import { resultsState } from "@atoms/mainAtom";
+
+import { useAppDispatch } from "@store/hooks";
+import { resetResults } from "@reducers/resultSlice";
 
 const BackContainer = () => {
   const navigate = useNavigate();
-  const resetResults = useResetRecoilState(resultsState);
+  const dispatch = useAppDispatch();
 
   const handleBackOnClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    resetResults();
+    dispatch(resetResults());
     navigate("/");
   };
 

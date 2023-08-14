@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { membersState, resultsState } from "@atoms/mainAtom";
+import { useAppSelector } from "@store/hooks";
 
 interface Props {
   children: React.ReactNode;
@@ -25,8 +24,7 @@ const MainContainer = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const members = useRecoilValue(membersState);
-  const results = useRecoilValue(resultsState);
+  const { members, results } = useAppSelector(({ members, results }) => ({ members, results }));
 
   useEffect(() => {
     const pathname = location.pathname;

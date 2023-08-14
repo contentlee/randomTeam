@@ -8,7 +8,9 @@
       "@contexts/*": ["src/contexts/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
-      "@helpers/*": ["src/helpers/*"]
+      "@helpers/*": ["src/helpers/*"],
+      "@reducers/*": ["src/reducers/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }

@@ -1,12 +1,13 @@
-import { useRecoilValue } from "recoil";
-
 import { ButtonComponent } from "@components/common";
-import { membersState, teamsState, resultsState } from "@atoms/mainAtom";
+
+import { useAppSelector } from "@store/hooks";
 
 const SaveContainer = () => {
-  const members = useRecoilValue(membersState);
-  const teams = useRecoilValue(teamsState);
-  const results = useRecoilValue(resultsState);
+  const { members, teams, results } = useAppSelector(({ members, teams, results }) => ({
+    members,
+    teams: teams.list,
+    results,
+  }));
 
   const handleSaveOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

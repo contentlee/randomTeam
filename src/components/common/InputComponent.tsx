@@ -8,7 +8,7 @@ interface Props {
     fn?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     max?: string;
 
-    defaultValue?: string | number;
+    value?: string | number;
   };
 }
 
@@ -35,9 +35,9 @@ const Input = styled.input`
 `;
 
 const InputComponent = ({
-  props: { type = "text", placeholder = "입력해주세요", max = "100", fn = () => {}, defaultValue },
+  props: { type = "text", placeholder = "입력해주세요", max = "100", fn = () => {}, value },
 }: Props) => {
-  return <Input type={type} placeholder={placeholder} onChange={fn} min="0" max={max} defaultValue={defaultValue} />;
+  return <Input type={type} placeholder={placeholder} onChange={fn} min="0" max={max} value={value} />;
 };
 
 export default InputComponent;
