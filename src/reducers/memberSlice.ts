@@ -5,13 +5,15 @@ export const memberSlice = createSlice({
   initialState: [] as string[],
   reducers: {
     addMember: (state, { payload: member }) => {
-      state.push(member);
+      return [...state, member];
     },
-    addMembers: (state, { payload: members }) => {
-      state = members;
+    addMembers: (_, { payload: members }) => {
+      return members;
     },
     deleteMember: (state, { payload: id }) => {
-      state.splice(id, 1);
+      const tmp = [...state];
+      tmp.splice(id, 1);
+      return tmp;
     },
     resetMember: () => {
       return [];

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { deleteTeam } from "@reducers/teamSlice";
 
 const ListContainer = () => {
-  const teams = useAppSelector(({ teams }) => teams.list);
+  const teams = useAppSelector((state) => state.teams.list);
   const dispatch = useAppDispatch();
 
   const handleDeleteTeamOnClick = (e: React.MouseEvent, id: number) => {

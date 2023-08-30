@@ -11,11 +11,11 @@ const SubmitContainer = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const { members, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+  const {
     members,
-    teamCount: teams.count,
+    teams: { count: teamCount },
     results,
-  }));
+  } = useAppSelector((state) => state);
 
   const handleSubmitOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

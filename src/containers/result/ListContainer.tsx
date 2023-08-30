@@ -3,10 +3,10 @@ import { ResultComponent } from "@components/result";
 import { useAppSelector } from "@store/hooks";
 
 const ListContainer = () => {
-  const { teams, results } = useAppSelector(({ teams, results }) => ({
-    teams: teams.list,
+  const {
+    teams: { list: teams },
     results,
-  }));
+  } = useAppSelector((state) => state);
 
   return (
     <div>

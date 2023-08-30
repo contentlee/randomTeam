@@ -21,7 +21,7 @@ const InputForm = styled.form`
 
 const InputContainer = () => {
   const dispatch = useAppDispatch();
-  const members = useAppSelector(({ members }) => members);
+  const members = useAppSelector((state) => state.members);
 
   const handleInputOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

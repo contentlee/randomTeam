@@ -3,11 +3,11 @@ import { ButtonComponent } from "@components/common";
 import { useAppSelector } from "@store/hooks";
 
 const SaveContainer = () => {
-  const { members, teams, results } = useAppSelector(({ members, teams, results }) => ({
+  const {
     members,
-    teams: teams.list,
+    teams: { list: teams },
     results,
-  }));
+  } = useAppSelector((state) => state);
 
   const handleSaveOnClick = (e: React.MouseEvent) => {
     e.preventDefault();

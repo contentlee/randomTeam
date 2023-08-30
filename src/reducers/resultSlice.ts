@@ -4,8 +4,8 @@ export const resultSlice = createSlice({
   name: "results",
   initialState: [] as string[][],
   reducers: {
-    setResults: (state, { payload: results }) => {
-      results.forEach((res: string[]) => state.push(res));
+    setResults: (_, { payload: results }) => {
+      return results;
     },
     resetResults: () => {
       return [];

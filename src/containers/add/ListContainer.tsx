@@ -5,7 +5,7 @@ import { deleteMember } from "@reducers/memberSlice";
 
 const ListContainer = () => {
   const dispatch = useAppDispatch();
-  const members = useAppSelector(({ members }) => members);
+  const members = useAppSelector((state) => state.members);
 
   const handleDeleteMemberOnClick = (e: React.MouseEvent, id: number) => {
     e.preventDefault();

@@ -27,12 +27,11 @@ const InputForm = styled.form`
 const InputContainer = () => {
   const dispatch = useAppDispatch();
 
-  const { members, teams, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+  const {
     members,
-    teams: teams.list,
-    teamCount: teams.count,
+    teams: { list: teams, count: teamCount },
     results,
-  }));
+  } = useAppSelector((state) => state);
 
   const handleCountOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

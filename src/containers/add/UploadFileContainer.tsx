@@ -31,12 +31,11 @@ const RadioWrapper = styled.div`
 
 const UploadFileContainer = () => {
   const dispatch = useDispatch();
-  const { members, teams, teamCount, results } = useAppSelector(({ members, teams, results }) => ({
+  const {
     members,
-    teams: teams.list,
-    teamCount: teams.count,
+    teams: { list: teams, count: teamCount },
     results,
-  }));
+  } = useAppSelector((state) => state);
 
   const [mode, setMode] = useState<number>(0);
 

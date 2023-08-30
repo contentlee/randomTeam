@@ -15,21 +15,29 @@ export const teamSlice = createSlice({
   initialState,
   reducers: {
     addTeam: (state, { payload: team }) => {
-      state.list.push(team);
+      const tmp = state;
+      tmp.list = [...tmp.list, team];
+      return tmp;
     },
     addTeams: (state, { payload: teams }) => {
-      teams.forEach((team: string) => state.list.push(team));
+      const tmp = state;
+      tmp.list = [...tmp.list, ...teams];
+      return tmp;
     },
     deleteTeam: (state, { payload: id }) => {
-      state.list.splice(id, 1);
+      const tmp = state;
+      tmp.list.splice(id, 1);
+      return tmp;
     },
     changeTeamCount: (state, { payload: cnt }) => {
-      state.count = cnt;
-      return state;
+      const tmp = state;
+      tmp.count = cnt;
+      return tmp;
     },
     resetTeamCount: (state) => {
-      state.count = 0;
-      return state;
+      const tmp = state;
+      tmp.count = 0;
+      return tmp;
     },
     resetTeamAll: () => ({ list: [], count: 0 }),
   },

@@ -24,7 +24,7 @@ const MainContainer = ({ children }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { members, results } = useAppSelector(({ members, results }) => ({ members, results }));
+  const { members, results } = useAppSelector((state) => state);
 
   useEffect(() => {
     const pathname = location.pathname;
