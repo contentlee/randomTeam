@@ -1,8 +1,21 @@
 import { WrapperComponent } from "@components/common";
 import { InputContainer, ListContainer, ResetContainer, SubmitContainer, UploadFileContainer } from "@containers/add";
 import { MainContainer } from "@containers/common";
+import { useEffect, useState } from "react";
 
 const AddMembersPage = () => {
+  const [scroll, setScroll] = useState<number>();
+  const handleScroll = () => {
+    console.log(window.scrollY);
+    setScroll(window.scrollY);
+  };
+  useEffect(() => {
+    console.log(scroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <MainContainer>
       <WrapperComponent>
